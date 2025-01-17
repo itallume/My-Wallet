@@ -21,6 +21,7 @@ class CardModel{
 
   Widget toWidget(BuildContext context) {
     return Card(
+      color: Color.fromARGB(255, 185, 219, 195),
       child: Container(
         padding: EdgeInsets.all(10),
         child: Column(
@@ -31,7 +32,10 @@ class CardModel{
               width: MediaQuery.sizeOf(context).width * 0.8,
               
               child: Text(title,
-               style: TextStyle(fontSize: 30,),
+               style: TextStyle(
+                fontSize: 35,
+                color: Color.fromARGB(255, 17, 95, 59)
+                 ),
                softWrap: false,
                 overflow: TextOverflow.ellipsis,
             )),

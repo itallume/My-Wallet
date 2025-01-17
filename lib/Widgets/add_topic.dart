@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_wallet/Controller/controller.dart';
-import 'package:my_wallet/Models/card_model.dart';
 
 class AddTopic extends StatefulWidget{
   final int cardId;
@@ -35,6 +34,7 @@ class _AddTopic extends State<AddTopic>{
             ),),
         
         TextField(
+          maxLines: null,
           controller: topicContentController,
           decoration: InputDecoration(
             border: OutlineInputBorder(),

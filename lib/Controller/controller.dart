@@ -13,10 +13,6 @@ class Controller {
   }
 
   Future<List<Widget>> getAllCards(context) async {
-    if (cardsRepository == null) {
-      throw Exception("Uninitialized cards repository");
-    }
-
     final cards = await cardsRepository.readAll();
 
     if (cards.isEmpty) {
@@ -42,9 +38,6 @@ class Controller {
   }
 
   Future<CardModel> getCard(int? id){
-    if (cardsRepository == null){
-      throw Exception("uninitialized cards repository");
-    }
     try{
       return cardsRepository!.read(id);
     }

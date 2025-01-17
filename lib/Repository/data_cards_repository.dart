@@ -15,7 +15,7 @@ class DataCardsRepository{
 
   Future<CardModel> read(int? id) async{
     if (id == null) {
-    throw Exception("ID não pode ser nulo.");
+      throw Exception("ID não pode ser nulo.");
     }
     final cardData = await storage.read(key: id.toString());
     if(cardData != null){
@@ -32,11 +32,14 @@ class DataCardsRepository{
   }
 
   Future<void> update(CardModel newCard) async{
-    if(read(newCard.id) == null){
+    try{
+      read(newCard.id);
+    }catch(e){
       throw Exception("Card inexistente: ${newCard.id}");
     }
+  
     final jsonData = newCard.toJson();
-    await storage.write(key: '${jsonData['id']}', value: jsonEncode(jsonData));
+    await storage.write(key: '${newCard.id}', value: jsonEncode(jsonData));
   }
 
   Future<void> delete(int id) async {

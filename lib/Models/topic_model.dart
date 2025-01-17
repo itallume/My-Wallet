@@ -39,7 +39,7 @@ class TopicModel {
 
               InkWell(
                 onTap: (){
-                  Clipboard.setData(ClipboardData(text: "Conceição Maria da Costa Oliveia"));
+                  Clipboard.setData(ClipboardData(text: content));
                   ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('Texto copiado!')));
                 },
@@ -56,7 +56,7 @@ class TopicModel {
     ),
   );}
 
-  Map<String, dynamic> toJson() {
+  Map<String, String> toJson() {
     return {
       'name': name,
       'content': content,

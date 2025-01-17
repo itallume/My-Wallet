@@ -54,4 +54,21 @@ class Controller {
     
   }
 
+  Future<void> addTopicToCard(String topicName, String content, int id) async{
+    
+    if(topicName.isEmpty){
+      throw Exception("Nome do tópico não pode ser nulo");
+    }
+    if(content.isEmpty){
+      throw Exception("Conteúdo do tópico não pode ser nulo");
+    }
+    try{
+      CardModel card = await cardsRepository.read(id);
+      card.addTopic(TopicModel(name: topicName, content: content));
+      cardsRepository.update(card);
+    }catch(e){
+      print("TRATAR!!!!!!");
+    }
+  }
+
 }

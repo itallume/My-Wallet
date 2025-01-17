@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_wallet/Controller/controller.dart';
+import 'package:my_wallet/Models/card_model.dart';
+import 'package:my_wallet/Models/topic_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,21 +33,19 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Controller controller = Controller();
+   
+
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: FutureBuilder<List<Widget>>(
+    FutureBuilder<List<Widget>> cardsList = FutureBuilder<List<Widget>>(
         future: controller.getAllCards(context),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: CircularProgressIndicator(),
             );
+
           } else if (snapshot.hasError) {
               return Center(
                 child: Text(
@@ -53,17 +53,29 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: TextStyle(color: Colors.red),
                 ),
               );
+
           } else if (snapshot.hasData) {
-              return Column(
-                children: snapshot.data!,
+              return SingleChildScrollView(
+                child: Column(
+                  children: snapshot.data!
+                ),
               );
+
           } else {
               return Center(
                 child: Text("Nenhum card disponível."),
               );
           }
         },
+      );
+
+    
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title),
       ),
+      body: cardsList
     );
     // return Scaffold(
     //   appBar: AppBar(

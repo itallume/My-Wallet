@@ -1,49 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:my_wallet/Models/topic_model.dart';
+import 'package:my_wallet/Widgets/add_topic.dart';
 
 class CardModel{
     BuildContext? context;
     int? id;
     String title;
-    List<TopicModel>? topics;
+    List<TopicModel> topics;
 
   CardModel({
     this.context,
     this.id,
     required this.title,
-    this.topics,
+    required this.topics,
   });
+
+  void addTopic(TopicModel topic){
+    topics.add(topic);
+  }
 
   Widget toWidget(BuildContext context) {
     return Card(
       child: Container(
         padding: EdgeInsets.all(10),
         child: Column(
+          spacing: 15,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               width: MediaQuery.sizeOf(context).width * 0.8,
-              margin: EdgeInsetsDirectional.only(bottom: 10),
+              
               child: Text(title,
                style: TextStyle(fontSize: 30,),
                softWrap: false,
                 overflow: TextOverflow.ellipsis,
             )),
-            ...topicWidgetList(context)
+            ...topicWidgetList(context),
+            AddTopic(cardId: id!,)
       ],),
       )
     );
   }
 
   List<Widget> topicWidgetList(context){
-    return topics?.map((e) => e.toWidget(context)).toList() ?? [];
+    return topics.map((e) => e.toWidget(context)).toList() ?? [];
   }
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
       'title': title,
-      'topics': topics?.map((topic) => topic.toJson()).toList(),
+      'topics': topics.map((topic) => topic.toJson()).toList(),
     };
   }
 

@@ -3,6 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:my_wallet/Models/card_model.dart';
 import 'package:my_wallet/Models/topic_model.dart';
 import 'package:my_wallet/Repository/data_cards_repository.dart';
+import 'package:my_wallet/Widgets/card_widget.dart';
 
 class Controller {
 
@@ -12,7 +13,7 @@ class Controller {
     cardsRepository = DataCardsRepository(storage: FlutterSecureStorage()); // AJEITAR!!
   }
 
-  Future<List<Widget>> getAllCards(context) async {
+  Future<List<Widget>> getAllCards() async {
     final cards = await cardsRepository.readAll();
 
     if (cards.isEmpty) {
@@ -27,7 +28,7 @@ class Controller {
     }
     
     return cards.map((cardModel) {
-      return cardModel.toWidget(context);
+      return CardWidget(cardModel: cardModel);
     }).toList();
 
     

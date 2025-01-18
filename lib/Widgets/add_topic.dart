@@ -6,13 +6,10 @@ class AddTopic extends StatefulWidget{
   const AddTopic({super.key, required this.cardId});
 
   @override
-  State<StatefulWidget> createState() => _AddTopic(cardId: cardId); // AjEITARRR
+  State<StatefulWidget> createState() => _AddTopic();
 }
 
 class _AddTopic extends State<AddTopic>{
-  int cardId;
-  _AddTopic({required this.cardId});
-
   Controller controller = Controller();
   bool activeForm = false;
   TextEditingController topicNameController = TextEditingController();
@@ -58,7 +55,7 @@ class _AddTopic extends State<AddTopic>{
         
           TextButton(
             onPressed: ()=>{
-              controller.addTopicToCard(topicNameController.text, topicContentController.text, cardId),
+              controller.addTopicToCard(topicNameController.text, topicContentController.text, widget.cardId),
               setState(() {
                 activeForm = !activeForm;
               })

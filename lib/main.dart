@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_wallet/Controller/controller.dart';
-import 'package:my_wallet/Models/card_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,19 +32,23 @@ class MyHomePage extends StatefulWidget {
 
 @override
 class _MyHomePageState extends State<MyHomePage> {
-  late Future<List<Widget>>? _cardsFuture;
+  late Future<List<Widget>> _cardsFuture;
   final controller = Controller();
 
-  void _loadCards(context) {
+  void _loadCards() {
     setState(() {
-      _cardsFuture = controller.getAllCards(context);
+      _cardsFuture = controller.getAllCards();
     });
   }
 
   @override
+  void initState() {
+    super.initState();
+    _cardsFuture = controller.getAllCards();
+  }
+
+  @override
   Widget build(BuildContext context) {
-   
-    _loadCards(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -53,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: [
           IconButton(
             icon: Icon(Icons.refresh),
-            onPressed: () => _loadCards(context), // Recarrega os cards
+            onPressed: () => _loadCards(),
           ),
         ],
       ),

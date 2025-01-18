@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_wallet/Controller/controller.dart';
+import 'package:my_wallet/Widgets/create_card.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,7 +35,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late Future<List<Widget>> _cardsFuture;
   final controller = Controller();
-
+  
   void _loadCards() {
     setState(() {
       _cardsFuture = controller.getAllCards();
@@ -77,7 +78,10 @@ class _MyHomePageState extends State<MyHomePage> {
           } else if (snapshot.hasData) {
             return SingleChildScrollView(
               child: Column(
-                children: snapshot.data!,
+                children: [
+                  ...snapshot.data!,
+                  CreateCard(),
+                ]
               ),
             );
           } else {

@@ -59,7 +59,7 @@ class _AddTopic extends State<AddTopic>{
               setState(() {
                 activeForm = !activeForm;
               })
-          }, child: Text("Criar",
+          }, child: Text("Adicionar",
           style: TextStyle(fontSize: 20,)
           ,))
         ],)

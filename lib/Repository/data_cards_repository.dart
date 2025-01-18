@@ -7,9 +7,13 @@ class DataCardsRepository{
 
   DataCardsRepository({required this.storage});
 
-  Future<void> create(CardModel card) async {
-    card.id = await generateId();
-    final jsonData = card.toJson();
+  Future<void> create(String title) async {
+    int id = await generateId();
+    final jsonData = {
+      'id': id,
+      'title': title,
+      'topics': [],
+    };
     await storage.write(key: '${jsonData['id']}', value: jsonEncode(jsonData));
   }
 

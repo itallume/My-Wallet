@@ -34,13 +34,13 @@ class Controller {
     
   }
 
-  void createCard(CardModel cardModel){
-    cardsRepository.create(cardModel);
+  void createCard(String title){
+    cardsRepository.create(title);
   }
 
   Future<CardModel> getCard(int? id){
     try{
-      return cardsRepository!.read(id);
+      return cardsRepository.read(id);
     }
     catch(e){
       throw Exception(e.runtimeType);
